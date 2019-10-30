@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- Breadcrumbs Start
+================================================== -->
+
+<section id="topic-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+				<br>
+				<br>
+                <h3>BLOG</h3>
+                <p>Latest News</p>
+            </div>    <!-- End of /.col-md-4 -->
+            <div class="col-md-8 hidden-xs">
+                <ol class="breadcrumb pull-right">
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'blogapps:create_blog' %}">Create Blog</a></li>
+                </ol>
+            </div>    <!-- End of /.col-md-8 -->
+        </div>    <!-- End of /.row -->
+    </div>    <!-- End of /.container -->
+</section>    <!-- End of /#Topic-header -->
+
+
+<section id="blog">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 clearfix">
+                {% for obj1 in bl %}
+                <div>
+                    <img src="{{obj1.author.author_image.url}}" width="70" height="70" alt=" ">
+                </div>
+                <ul class="blog-zone">
+                    <li>
+                        <div class="blog-icon">
+                            <i class="fa  fa-pencil"></i>
+                        </div>
+                        <div class="blog-box">
+<!--                            <a href="article/{{obj1.id}}"><img alt=" " height="250" src="{{obj1.image.url}}" width="400"></a>-->
+                            <a href="{% url 'blogapps:article' obj1.id %}"><img alt=" " height="250" src="{{obj1.image.url}}" width="400"></a>
+                                <div class="blog-post-body clearfix">
+                                    <a href="blog-single.html">
+                                        <h2><a href="{% url 'blogapps:article' obj1.id %}">{{ obj1.title }}</a></h2>
+                                    </a>
+                                    <div class="blog-post-tag">
+                                        <div class="block">
+                                            <i class="fa fa-clock-o"></i>
+                                            <p>{{ obj1.created_on }}</p>
+                                        </div>
+                                        <div class="block">
+                                            <i class="fa fa-user"></i>
+                                            <p>{{ obj1.author }}</p>
+                                        </div>
+                                        <div class="block">
+                                            <i class="fa fa-tags"></i>
+                                            <p>
+                                                <a href="">Culture</a>,
+                                                <a href="">Green Items</a>
+                                            </p>
+                                        </div>
+                                        <div class="block">
+                                            <i class="fa fa-comments"></i>
+                                            <p>3 Comments</p>
+                                        </div>
+                                    </div>
+                                    <p>{{ obj1.content | safe }}</p>
+                                    <a class="btn btn-default btn-transparent pull-right" href="blog-single.html"
+                                       role="button">
+                                        <span>Read More</span>
+                                    </a>
+                                    <a href="{% url 'blogapps:blog_delete' obj1.id %}" role="button" class="btn btn-default btn-transparent pull-right">delete</a>
+                                    <a href="{% url 'blogapps:blog_update' obj1.id %}" role="button" class="btn btn-default btn-transparent pull-right">update</a>
+                                </div>
+                        </div>    <!-- End of /.blog-box -->
+                    </li>
+                </ul>    <!-- End of /.blog-zone -->
+                {% endfor %}
+
+                <!-- Pagination -->
+                {% if bl.has_other_pages %}
+                <ul class="pagination pull-right">
+                    {% if bl.has_previous %}
+                        <li><a href="?page={{bl.previous_page_number}}">&laquo;</a></li>
+                    {% else %}
+                        <li class="disabled">&laquo;</li>
+                    {% endif %}
+                    {% for i in bl.paginator.page_range %}
+                        {% if bl.number == i %}
+                            <li class="active"><span>{{i}} <span class="sr-only">(current)</span></span></li>
+                        {% else %}
+                            <li><a href="?page={{i}}">{{i}}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if bl.has_next %}
+                        <li><a href="?page={{bl.next_page_number}}">»</a></li>
+                    {% else%}
+                        <li class="disabled"><span>»</span></li>
+                    {% endif %}
+                </ul>
+                {% endif %}    <!-- End of /.pagination -->
+            </div>    <!-- End of /.col-md-9 -->
+
+            <div class="col-md-3">
+                <div class="blog-sidebar">
+                    <div class="block">
+                        <h4>Catagories</h4>
+                        <div class="list-group">
+                            <a class="list-group-item" href="#">
+                                <i class="fa  fa-dot-circle-o"></i>
+                                Italian
+                            </a>
+                            <a class="list-group-item" href="#">
+                                <i class="fa  fa-dot-circle-o"></i>
+                                Traditional
+                            </a>
+                            <a class="list-group-item" href="#">
+                                <i class="fa  fa-dot-circle-o"></i>
+                                Indian
+                            </a>
+                            <a class="list-group-item" href="#">
+                                <i class="fa  fa-dot-circle-o"></i>
+                                Spanish
+                            </a>
+                            <a class="list-group-item" href="#">
+                                <i class="fa  fa-dot-circle-o"></i>
+                                Thai
+                            </a>
+                        </div>
+                    </div>    <!-- End of /.block -->
+                    <div class="block">
+                        <h4>Popular Posts</h4>
+                        {% for obj1 in ob %}
+                        <ul class="media-list">
+                            <li class="media">
+                                <a class="pull-left" href="#">
+                                    <img alt="..." class="media-object" src="{{obj1.image.url}}">
+                                </a>
+                                <div class="media-body">
+                                    <a class="media-heading" href="article/{{obj1.id}}">{{obj1.title}}</a>
+                                    <p>{{obj1.created_on}}</p>
+                                </div>
+                            </li>    <!-- End of /.media -->
+                        </ul>    <!-- End of /.media-list -->
+                        {% endfor %}
+                    </div>    <!-- End of /.block -->
+
+                    <div class="block">
+                        <h4>Tag Cloud</h4>
+                        <div class="tag-link">
+                            <a href="">BALLET</a>
+                            <a href="">BLOG</a>
+                            <a href="">CHRISTMAS</a>
+                            <a href="">ELEGANCE</a>
+                            <a href="">ELEGANT</a>
+                            <a href="">SHOPPING</a>
+                            <a href="">SHOP</a>
+                            <a href="">PHOTOGRAPHY</a>
+                        </div>
+                    </div>    <!-- End of /.block -->
+
+                </div>    <!-- End of /.blog-sidebar -->
+            </div>    <!-- End of /.col-md-3 -->
+        </div>    <!-- End of /.row -->
+    </div>    <!-- End of /.container -->
+</section>    <!-- End of /#Blog -->
+
+{% endblock content %}

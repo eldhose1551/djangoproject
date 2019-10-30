@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 ftco-animate">
+                <form action="." method="post" class="billing-form">
+                    {% csrf_token %}
+                    <h3 class="mb-4 billing-heading" style="font-weight: bolder;">
+                        <center>Billing Details</center>
+                    </h3>
+                    <br>
+                    <div class="row align-items-end">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="firstname">Firt Name</label>
+                                <input class="form-control" id="firstname" name="first-name" placeholder="" type="text"
+                                       value="{{request.user.first_name}}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="lastname">Last Name</label>
+                                <input class="form-control" id="lastname" name="last-name" placeholder="" type="text"
+                                       value="{{request.user.last_name}}">
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="state">State</label>
+                                <input class="form-control" id="state" name="state" placeholder="" type="text">
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="streetaddress">Street Address</label>
+                                <input class="form-control" id="streetaddress" name="street"
+                                       placeholder="House number and street name"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="apartment">Apartment</label>
+                                <input class="form-control" id="apartment" name="apartment"
+                                       placeholder="Appartment, suite, unit etc: (optional)"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="towncity">Town / City</label>
+                                <input class="form-control" id="towncity" name="town" placeholder="" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="postcodezip">Postcode / ZIP *</label>
+                                <input class="form-control" id="postcodezip" name="postcode" placeholder="" type="text">
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input class="form-control" id="phone" name="phone" placeholder="" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="emailaddress">Email Address</label>
+                                <input class="form-control" id="emailaddress" name="emailid" placeholder="" type="text"
+                                       value="{{request.user.email}}">
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="coupon">Code</label>
+                                <input class="form_control" id="coupon" name="coupon" placeholder="" type="text">
+
+                            </div>
+                            <input type="submit" value="submit" onclick="total()">
+                        </div>
+                    </div>
+
+                    <!-- .form -->
+                    <br>
+                    <br>
+
+                    <div class="row mt-5 pt-3 d-flex">
+                        <div class="col-md-6 d-flex">
+                            {% for obj in ob %}
+                            <div class="cart-detail cart-total bg-light p-3 p-md-4">
+                                <h3 class="billing-heading mb-4" style="font-weight:bolder;">Cart Total</h3>
+                                <p class="d-flex">
+                                    <span>Subtotal&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;</span>
+                                    <span>$ {{obj.totalprice}}</span>
+                                </p>
+                                <p class="d-flex">
+                                    <span>Delivery&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;</span>
+                                    <span>$ 0.00</span>
+                                </p>
+                                <p class="d-flex">
+                                    <span>Discount&nbsp;&nbsp;&nbsp;:&nbsp;</span>
+                                    <span>$ 0.00</span>
+                                </p>
+                                <hr>
+                                <p class="d-flex total-price">
+                                    <span>Total&nbsp;&nbsp;:&nbsp;</span>
+                                    <span><input class="account_input" id="totalprice" name="totalprice"
+                                               placeholder="" style="height: auto; padding: 5px; width: 220px; border: 1px solid #dedede;" type="text" readonly="readonly"
+                                               value=""  >
+                                    </span>
+                                </p>
+                            </div>
+                            {% endfor %}
+                            <p>
+                                <button class="btn btn-primary">Place an order</button>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="cart-detail bg-light p-3 p-md-4">
+                                <h3 class="billing-heading mb-4" style="font-weight:bolder;">Payment Method</h3>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="radio">
+                                            <label><input class="mr-2" name="optradio" type="radio"> Direct Bank
+                                                Transfer</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="radio">
+                                            <label><input class="mr-2" name="optradio" type="radio"> Check
+                                                Payment</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="radio">
+                                            <label><input class="mr-2" name="optradio" type="radio"> Paypal</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="checkbox">
+                                            <label><input class="mr-2" type="checkbox" value=""> I have read and accept
+                                                the
+                                                terms and conditions</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<p><a class="btn btn-primary py-3 px-4" href="#">Place an order</a></p>-->
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div> <!-- .col-md-8 -->
+        </div> <!-- .row -->
+    </div> <!-- .container -->
+
+</section> <!-- .section -->
+
+<br>
+<br>
+<script>
+function total(){
+a ={{co.cprice}};
+b = {{ob.totalprice}};
+m = b-a;
+document.getElemenetById('totalprice').value= m;
+}
+</script>
+{% endblock content %}

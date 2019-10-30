@@ -1,0 +1,286 @@
+<!-- TOP HEADER Start-->
+
+{% load static %}
+
+<section id="top" style="background-color: lightslategray;">
+    <ul class="login-cart">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <p class="contact-action"><i class="fa fa-phone-square"></i>IN CASE OF ANY QUESTIONS, CALL THIS
+                        NUMBER:<strong>+565 975 658</strong></p>
+                </div> <!-- end of col-md-7 -->
+                <div class="col-md-5 clearfix inline">
+                    <span>
+                    <li>
+                        {% if user.is_authenticated %}
+                        <p style="font-size:14px;">Welcome {{user.username}} <a href="{% url 'logout' %}">Logout</a></p>
+                        {% else %}
+                        <a data-target="#myModal" data-toggle="modal" href="#">Login</a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        <a href="{% url 'registration' %}">Registration</a>
+                    </li>
+                    <li>
+                        <div class="cart dropdown">
+                            <a  href="{% url 'cart' %}"><i class="fa fa-shopping-cart"></i>Cart</a>
+
+                        </div>
+                    </li>
+                    </span>
+                </div>  <!-- end of col-md-3 -->
+                <div class="col-md-2">
+                    <li>
+					    <div class="search-box">
+						    <div class="input-group">
+                                <form action="{% url 'search' %}" method="GET" name="myform">
+                                    <input name="search" placeholder="Search" type="text"/>
+                                </form>
+                                {% if messages %}
+                                    {% for m1 in messages %}
+                                        {{m1}}
+                                    {% endfor %}
+                                {% endif %}
+    					    </div>
+				        </div><!-- /.search-box -->
+                    </li>
+                </div>
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </ul>
+
+    <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="myModal" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Introduce Yourself</h4>
+                </div> <!-- End Of model-header -->
+
+                <div class="modal-body clearfix">
+
+                    <form action="{% url 'register' %}" class="std" id="create-account_form" method="post">
+                        {% csrf_token %}
+                        <fieldset>
+                            <h3>Create your account</h3>
+                            <div class="form_content clearfix">
+                                <p class="text">
+                                    <label for="create_username">Username</label>
+                                    <span>
+                                        <input class="account_input" id="create_username" name="create_username"
+                                               placeholder="Enter Username" style="height: auto; padding: 5px; width: 220px; border: 1px solid #dedede;" type="text"
+                                               value="">
+                                    </span>
+                                </p>
+                                <p class="text">
+                                    <label for="create_password">Password</label>
+                                    <span>
+                                        <input class="account_input" id="create_password" name="create_password"
+                                               placeholder="Enter Password" style="height: auto; padding: 5px; width: 220px; border: 1px solid #dedede;" type="password"
+                                               value="">
+                                    </span>
+                                </p>
+                                <p class="text">
+                                    <label for="cnfrm_pswd">Confirm password</label>
+                                    <span>
+                                        <input class="account_input" id="cnfrm_pswd"
+                                               name="cnfrm_pswd"
+                                               placeholder="Enter confirm password" style="height: auto; padding: 5px; width: 220px; border: 1px solid #dedede;" type="password"
+                                               value="">
+                                    </span>
+                                </p>
+                                <p class="text">
+                                    <label for="email_create">Email</label>
+                                    <span>
+                                        <input class="account_input" id="email_create" name="email_create"
+                                               placeholder="Enter Email Id" style="height: auto; padding: 5px; width: 220px; border: 1px solid #dedede;" type="email"
+                                               value="">
+                                    </span>
+                                </p>
+
+                                <p class="submit">
+                                    <button class="btn btn-primary">Create Your Account</button>
+                                </p>
+                            </div><!-- End Of form-content -->
+                        </fieldset>
+                    </form> <!-- End Of form-1 -->
+
+                    {% if user.is_authenticated %}
+                    <h1>login</h1>
+                    {% else %}
+                    <form action="{% url 'login' %}" class="std" id="login_form" method="post">
+                        {% csrf_token %}
+                        <fieldset>
+                            <h3>Already registered?</h3>
+                            <div class="form_content clearfix">
+                                <p class="text">
+                                    <label for="username">Username</label>
+                                    <span>
+                                        <input class="account_input" id="username" name="username"
+                                               placeholder="Username" style="height: auto; padding: 5px; width: 220px; border: 1px solid #dedede;" type="text"
+                                               value="">
+                                    </span>
+                                </p>
+                                <p class="text">
+                                    <label for="passwd">Password</label>
+                                    <span>
+                                        <input class="account_input" id="passwd" name="passwd"
+                                               placeholder="Password" type="password" value="">
+                                    </span>
+                                </p>
+                                <p class="lost_password">
+                                    <a class="popab-password-link" href="#popab-password-reset">Forgot your
+                                        password?</a>
+                                </p>
+                                <p class="submit">
+                                    <button class="btn btn-success">Log in</button>
+                                </p>
+                            </div> <!-- End Of form-content -->
+                        </fieldset>
+                    </form><!-- End Of form-2 -->
+                    {% endif %}
+                </div> <!-- End Of modal-body -->
+
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+                </div> <!-- End Of modal-footer -->
+
+            </div> <!-- End Of modal-content -->
+        </div> <!-- End Of modal-dialogue -->
+    </div> <!-- End Of  modal -->
+</section>  <!-- End of Section -->
+
+
+<!-- LOGO Start -->
+
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="#">
+                    <img alt="logo" src="{% static 'images/logo.jpg' %}" style="width: 450px; height: 100px;}">
+                </a>
+            </div>    <!-- End of col-md-12 -->
+        </div>    <!-- End of row -->
+    </div>    <!-- End of container -->
+</header> <!-- End of Header -->
+
+
+<!-- MENU Start -->
+
+{% load static %}
+
+<nav class="navbar navbar-default">
+
+    <div class="container">
+
+        <div class="navbar-header">
+            <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse"
+                    type="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div> <!-- End of navbar-header -->
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav nav-main">
+                <li class="active"><a href="{% url 'index' %}">HOME</a></li>
+                <li><a href="{% url 'shop' %}">SHOP</a></li>
+                <li><a href="{% url 'blog' %}">BLOG</a></li>
+                <li class="dropdown"><a href="#">PAGES<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li><a href="#">Separated link</a></li>
+                    </ul>
+                </li> <!-- End of dropdown -->
+            </ul> <!-- End of nav-main -->
+        </div>    <!-- end of navbar-collapse -->
+
+    </div> <!-- end of container -->
+</nav> <!-- End of nav -->
+
+
+<!-- SLIDER Start -->
+
+<section id="slider-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="nivoSlider" id="slider" style="height: 300px;">
+                    <img alt="" height="300" src="{% static 'images/sl1.jpg' %}"/>
+                    <img alt="" height="300" src="{% static 'images/sl2.jpg' %}"/>
+                    <img alt="" height="300" src="{% static 'images/n2.jpg' %}"/>
+                </div>    <!-- End of nivoslider -->
+            </div>    <!-- End of col-md-12 -->
+        </div>    <!-- End of row -->
+    </div> <!-- End of container -->
+</section> <!-- End of Section -->
+
+
+<!-- FEATURES Start
+================================================== -->
+
+<section id="features">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="block" style="background-color: lightslategray;">
+                    <div class="media">
+
+                        <div class="pull-left" href="#">
+                            <i class="fa fa-ambulance"></i>
+                        </div>
+
+                        <div class="media-body">
+                            <h4 class="media-heading">Free Shipping</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="block" style="background-color: lightslategray;">
+                    <div class="media">
+
+                        <div class="pull-left" href="#">
+                            <i class=" fa fa-foursquare"></i>
+                        </div>
+
+                        <div class="media-body">
+                            <h4 class="media-heading">Media heading</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="block" style="background-color: lightslategray;">
+                    <div class="media">
+
+                        <div class="pull-left" href="#">
+                            <i class=" fa fa-phone"></i>
+                        </div>
+
+                        <div class="media-body">
+                            <h4 class="media-heading">Call Us</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur.</p>
+                        </div>    <!-- End of /.media-body -->
+
+                    </div>    <!-- End of /.media -->
+                </div>    <!-- End of /.block -->
+            </div> <!-- End of /.col-md-4 -->
+
+        </div>    <!-- End of /.row -->
+    </div>    <!-- End of /.container -->
+</section>    <!-- End of section -->

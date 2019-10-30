@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- CATEGORY Start -->
+
+<section id="catagorie">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block">
+                    <div class="block-heading">
+                        <h2 style="color:lightslategrey; font-family: serif; font-style: italic; font-size: xx-large;">
+                            <b>DRESS CATEGORIES</b>
+                        </h2>
+                    </div>
+                    {% for obj in ob %}
+                    <div class="col-sm-4"><center>
+                        <img alt=" " height="250" src="{{obj.image.url}}" width="200">
+                        <h3 style="font-family: serif; font-weight: bolder; color: lightslategray;"><a href="{{obj.id}}">{{obj.title}}</a></h3>
+                        <h5 style="font-family: serif; color: lightslategray;">From: ${{obj.price}}</h5></center>
+                    </div>
+                    {% endfor %}
+                </div>    <!-- End of /.block -->
+            </div>    <!-- End of /.col-md-12 -->
+        </div>    <!-- End of /.row -->
+        <div>
+            <center>
+                <h2>
+                    <a href="add/"><input name="Add" type="button" value="Add" style="color: lightslategray;"></a>
+                </h2>
+            </center>
+        </div>
+    </div>    <!-- End of /.container -->
+</section>    <!-- End of Section -->
+
+
+<!-- PRODUCTS Start
+================================================== -->
+
+<section id="products">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="products-heading">
+                    <center>
+                        <h2 style="color: lightslategray; border-top: 5px solid lightslategrey;">NEW PRODUCTS</h2>
+                    </center>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <center>
+
+            <div class="col-md-3">
+                <div class="products">
+                    <a href="single-product.html">
+                        <img alt="" src="{% static 'images/lehanga.jpg' %}" height="550">
+                    </a>
+                    <a href="single-product.html">
+                        <h4>Lehanga</h4>
+                    </a>
+                    <p class="price">From: £690.99</p>
+                    <a class="view-link shutter" href="#">
+                        <i class="fa fa-plus-circle"></i>Add To Cart</a>
+                </div>    <!-- End of /.products -->
+            </div> <!-- End Of /.Col-md-3 -->
+
+            <div class="col-md-3">
+                <div class="products">
+                    <a href="single-product.html">
+                        <img alt="" src="{% static 'images/gown.jpeg' %}" height="550">
+                    </a>
+                    <a href="single-product.html">
+                        <h4>Royal Blue Gown</h4>
+                    </a>
+                    <p class="price">From: £1050.99</p>
+                    <a class="view-link shutter" href="#">
+                        <i class="fa fa-plus-circle"></i>Add To Cart</a>
+                </div>    <!-- End of /.products -->
+            </div> <!-- End Of Col-md-3 -->
+
+            <div class="col-md-3">
+                <div class="products">
+                    <a href="single-product.html">
+                        <img alt="" src="{% static 'images/frok.jpeg' %}" height="550">
+                    </a>
+                    <a href="single-product.html">
+                        <h4>White frock</h4>
+                    </a>
+                    <p class="price">From: £690.99</p>
+                    <a class="view-link shutter" href="#">
+                        <i class="fa fa-plus-circle"></i>Add To Cart</a>
+                </div>    <!-- End of /.products -->
+            </div> <!-- End Of /.Col-md-3 -->
+
+            <div class="col-md-3">
+                <div class="products">
+                    <a href="single-product.html">
+                        <img alt="" src="{% static 'images/churidar.jpg' %}" height="550">
+                    </a>
+                    <a href="single-product.html">
+                        <h4>Kerala churidar</h4>
+                    </a>
+                    <p class="price">From: £609.99</p>
+                    <a class="view-link shutter" href="#">
+                        <i class="fa fa-plus-circle"></i>Add To Cart</a>
+                </div>    <!-- End of /.products -->
+            </div> <!-- End Of /.Col-md-3 -->
+
+            <div class="col-md-3">
+                <div class="products">
+                    <a href="single-product.html">
+                        <img alt="" src="{% static 'images/kurta.jpg' %}" height="550">
+                    </a>
+                    <a href="single-product.html">
+                        <h4>Wedding kurta</h4>
+                    </a>
+                    <p class="price">From: £4999.99</p>
+                    <a class="view-link shutter" href="#">
+                        <i class="fa fa-plus-circle"></i>Add To Cart</a>
+                </div>    <!-- End of /.products -->
+            </div> <!-- End Of /.Col-md-3 -->
+
+            <div class="col-md-3">
+                <div class="products">
+                    <a href="single-product.html">
+                        <img alt="" src="{% static 'images/kurtis.jpg' %}" height="550">
+                    </a>
+                    <a href="single-product.html">
+                        <h4>Kurtis</h4>
+                    </a>
+                    <p class="price">From: £609.99</p>
+                    <a class="view-link shutter" href="#">
+                        <i class="fa fa-plus-circle"></i>Add To Cart</a>
+                </div>    <!-- End of /.products -->
+            </div> <!-- End Of /.Col-md-3 -->
+
+            <div class="col-md-3">
+                <div class="products">
+                    <a href="single-product.html">
+                        <img alt="" src="{% static 'images/saree.jpg' %}" height="550">
+                    </a>
+                    <a href="single-product.html">
+                        <h4>Kerala set saree</h4>
+                    </a>
+                    <p class="price">From: £699.99</p>
+                    <a class="view-link shutter" href="#">
+                        <i class="fa fa-plus-circle"></i>Add To Cart</a>
+                </div>    <!-- End of /.products -->
+            </div>    <!-- End of /.col-md-3 -->
+
+            <div class="col-md-3">
+                <div class="products">
+                    <a href="single-product.html">
+                        <img alt="" src="{% static 'images/salwar.jpg' %}" height="550">
+                    </a>
+                    <a href="single-product.html">
+                        <h4>Salwar</h4>
+                    </a>
+                    <p class="price">From: £669.99</p>
+                    <div>
+                        <a class="view-link shutter" href="#">
+                            <i class="fa fa-plus-circle"></i>Add To Cart</a>
+                    </div>
+                </div>    <!-- End of /.products -->
+            </div> <!-- End Of /.Col-md-3 -->
+        </center>
+        </div>    <!-- End of /.row -->
+    </div>    <!-- End of /.container -->
+</section>    <!-- End of Section -->
+
+{% endblock content %}

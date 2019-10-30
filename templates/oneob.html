@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div>
+    <center>
+        <br>
+        <br>
+        <br>
+        <img alt=" " src="{{ob.image.url}}" width="350" height="450">
+        <h1 style="color: lightslategray; font-weight: bolder;">{{ob.title}}</h1>
+        <h3 style="color: lightslategray;"> From: ${{ob.price}}</h3>
+        <h3 style="color: lightslategray;">Description: {{ob.description}} </h3>
+        {% if ob.offer %}
+        <h3 style="color: lightslategray;">Special offer</h3>
+        {% endif %}
+
+    </center>
+        <form action="" method="POST" enctype="multipart/form-data">
+        <center>
+            <h3 style="color: lightslategray; font-weight: bolder; font-style: italic; font-family: serif;"></h3>
+            <br>
+            <br>
+            {% csrf_token %}
+            <!--{{ form.as_p }}-->
+              <label for="user">User&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                    <span>
+                                        <input class="account_input" id="user" name="user"
+                                               placeholder="" style="height: auto; padding: 5px; width: 220px; border: 1px solid #dedede;" type="text"
+                                               value="{{user.username}}" readonly="readonly">
+                                    </span><br><br><br>
+
+            <label for="create_title">Title&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                    <span>
+                                        <input class="account_input" id="create_title" name="create_title"
+                                               placeholder="Title" style="height: auto; padding: 5px; width: 220px; border: 1px solid #dedede;" type="text"
+                                               value="{{ob.title}}" readonly="readonly">
+                                    </span><br><br><br>
+
+             <label for="size">Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                    <span>
+                                        <input class="account_input" id="size" name="size"
+                                               placeholder="" style="height: auto; padding: 5px; width: 220px; border: 1px solid #dedede;" type="text"
+                                               value="">
+                                    </span><br><br><br>
+
+
+            <label for="quantity">quantity&nbsp;&nbsp;&nbsp;</label>
+                                    <span>
+                                        <input class="account_input" id="quantity" name="quantity"
+                                               placeholder="" style="height: auto; padding: 5px; width: 220px; border: 1px solid #dedede;" type="text"
+                                               value="" onkeyup="total()">
+                                    </span><br><br><br>
+
+
+
+
+            <label for="totalprice">totalprice&nbsp;</label>
+                                    <span>
+                                        <input class="account_input" id="totalprice" name="totalprice"
+                                               placeholder="" style="height: auto; padding: 5px; width: 220px; border: 1px solid #dedede;" type="text" readonly="readonly"
+                                               value=""  >
+                                    </span><br><br><br>
+                <button class="btn btn-success">Submit</button>
+            <br><br>
+        </center>
+        </form>
+
+            <form action="." method="post">
+                {% csrf_token %}
+                <center>
+
+                    {% if form %}
+                    <input type="submit" value="CONTINUE" style="color: lightslategray; font-weight: bolder;">
+                    {% else  %}
+                    <input type="submit" value="CART" style="color: lightslategray; font-weight: bolder;">
+                    {% endif %}
+                </center>
+            </form>
+
+
+
+    </center>
+
+</div>
+<script>
+    function total(){
+    a = Number(document.getElementById('quantity').value);
+    b = {{ob.price}};
+    c = a * b;
+    document.getElementById('totalprice').value = c;
+    }
+</script>
+
+{% endblock content %}

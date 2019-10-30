@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- single item Start
+================================================== -->
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <center>
+                    <h2 style="color: orange; margin-top: 10px; border-top: white; font-style: italic; font-family: serif;font-size: -webkit-xxx-large; font-weight: bolder;">{{ob.name}}</h2>
+                    <img src="{{ob.image.url}}" alt=" " width="500" height="350">
+                    <p style="font-size: xx-large; font-weight: bold; color: orange;">From: ${{ob.price}}</p>
+                    <p style="font-size: xx-large; font-weight: bold; color: orange;">Comment: {{ob.description}}</p>
+                    {% if ob.offer %}
+                        <p style="font-size: xx-large; font-weight: bold; color: green;">Special offer</p>
+                    {% endif %}
+                </center>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

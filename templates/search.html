@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="background-color: wheat;">
+<center>
+    <br>
+    <br>
+    <div class="col-sm-12">
+        <br>
+        {% for obj in ob %}
+        <div class="col-sm-4">
+            <img alt=" " height="200" src="{{obj.image.url}}" width="200">
+            <h1 style="color: lightslategray; font-weight: bolder;"><a href="{{obj.id}}">{{obj.title}}</a></h1>
+        </div>
+        {% endfor %}
+    </div>
+</center>
+</body>
+</html>

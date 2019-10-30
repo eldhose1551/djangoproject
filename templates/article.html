@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- Breadcrumbs Start
+    ================================================== -->
+
+	<section id="topic-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<br>
+					<br>
+					<br>
+					<h1>BLOG</h1>
+					<p>Latest News and Musings</p>
+				</div>	<!-- End of /.col-md-4 -->
+				<div class="col-md-8 hidden-xs">
+					<ol class="breadcrumb pull-right">
+					  	<li><a href="{% url 'index' %}">Home</a></li>
+					  	<li><a href="{% url 'blog' %}">Blog</a></li>
+					  	<li class="active">Single Post</li>
+					</ol>
+				</div>	<!-- End of /.col-md-8 -->
+			</div>	<!-- End of /.row -->
+		</div>	<!-- End of /.container -->
+	</section>	<!-- End of /#Topic-header -->
+
+	<section id="blog">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9 clearfix">
+					<ul class="blog-zone">
+					    <li>
+					        <div class="blog-icon">
+					        	<i class="fa  fa-pencil"></i>
+					        </div>
+					        <div class="blog-box">
+					        	<img src="{{ob.image.url}}" alt="">
+
+					            <div class="blog-post-body clearfix">
+						            <a href="">
+					            		<h2>{{ob.title}}</h2>
+						            </a>
+					            	<div class="blog-post-tag">
+						            	<div class="block">
+						            		<i class="fa fa-clock-o"></i>
+						            		<p>{{ob.created_on}}</p>
+						            	</div>
+						            	<div class="block">
+						            		<i class="fa fa-user"></i>
+						            		<p>{{ob.author}}</p>
+						            	</div>
+						            	<div class="block">
+						            		<i class="fa fa-tags"></i>
+						            		<p>
+						            			<a href="">Food Culture</a>,
+						            			<a href="">Green Items</a>
+						            		</p>
+						            	</div>
+						            	<div class="block">
+						            		<i class="fa fa-comments"></i>
+						            		<p>3 Comments</p>
+						            	</div>
+						            </div>
+						            <p>{{ob.content}}</p>
+						            <blockquote>
+										<div class="block-qoute-by">
+					                        <p style="size:60px;">- {{ob.author}} , Author</p>
+					                    </div>
+					                </blockquote>
+<!--					                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde expedita neque excepturi iste cumque! Dolorem, ipsum, totam, culpa ullam dolores qui possimus corrupti suscipit recusandae quam magnam quis eaque incidunt!</p>-->
+					            </div>
+					        </div>
+					    </li>
+					</ul>	<!-- End of /.blog-zone -->
+
+					<div class="author-id">
+						<div class="media">
+							<h5>About The Author</h5>
+						  	<img class="media-object pull-left" src="{{ob.author.author_image.url}}" alt="...">
+						  	<div class="media-body">
+						    	<h6 class="media-heading">{{ob.author}}</h6>
+						    	<p>{{ob.author.description}}</p>
+						    </div>	<!-- End of /.media-body -->
+						</div>	<!-- End of /.media -->
+					</div>	<!-- End of /.author-id -->
+
+					<div class="comments-box">
+						<h5>{{ob3}} REPSONSES</h5>
+						{% for obj in ob2 %}
+						<div class="media">
+						  	<img class="media-object pull-left" src="{% static 'images/default-author.jpg' %}" alt="...">
+						  	<div class="media-body">
+						    	<h6 class="media-heading">{{obj.name}}<span> {{obj.date}} </span> <a href=""  class="pull-right">(reply)</a></h6>
+						    	<p>{{obj.message}}</p>
+						    </div>	<!-- End of /.meida-body -->
+						</div>	<!-- End of /.media -->
+						{% endfor %}
+					</div>
+
+					<div class="leave-comment">
+						<h5>LEAVE A COMMENT</h5>
+						<form action="{% url 'blogapps:create_comment' %}" class="form-horizontal" role="form" method="post">
+							{% csrf_token %}
+							<div class="form-group">
+						    	<label for="inputname" class="col-sm-2 control-label">Name</label>
+							    <div class="col-sm-10">
+							      	<input type="text" class="form-control" id="inputname" name="name" placeholder="Name">
+							    </div>
+						  	</div>	<!-- End of /.form-group -->
+						  	<div class="form-group">
+						    	<label for="inputEmail" class="col-sm-2 control-label">Email</label>
+							    <div class="col-sm-10">
+							      	<input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email">
+							    </div>
+						  	</div>	<!-- End of /.form-group -->
+						  	<div class="form-group">
+						    	<label for="inputwebsite" class="col-sm-2 control-label">Website</label>
+							    <div class="col-sm-10">
+							      	<input type="text" class="form-control" id="inputwebsite" name="website" placeholder="Website">
+							    </div>
+						  	</div>	<!-- End of /.form-group -->
+						  	<div class="form-group">
+						    	<label for="inputmessage" class="col-sm-2 control-label">Message</label>
+							    <div class="col-sm-10">
+							      	<textarea class="form-control" id="inputmessage" name="message" rows="3"></textarea>
+							    </div>
+						  	</div>	<!-- End of /.form-group -->
+
+							<div class="form-group">
+						    	<div class="col-sm-offset-2 col-sm-10">
+									<button type="submit" class="btn btn-primary">Send</button>
+						    	</div>
+						  	</div>	<!-- End of /.form-group -->
+						</form>	<!-- End of /.form-horizontal -->
+					</div>	<!-- End of /.leave comments -->
+				</div>	<!-- End of /.col-md-9 -->
+
+				<div class="col-md-3">
+					<div class="blog-sidebar">
+						<div class="block">
+							<h4>Catagories</h4>
+							<div class="list-group">
+								<a href="#" class="list-group-item">
+									<i class="fa  fa-dot-circle-o"></i>
+									Italian Foods
+								</a>
+								<a href="#" class="list-group-item">
+									<i class="fa  fa-dot-circle-o"></i>
+									Traditional Food
+								</a>
+								<a href="#" class="list-group-item">
+									<i class="fa  fa-dot-circle-o"></i>
+									Indian Food
+								</a>
+								<a href="#" class="list-group-item">
+									<i class="fa  fa-dot-circle-o"></i>
+									Spanish Food
+								</a>
+								<a href="#" class="list-group-item">
+									<i class="fa  fa-dot-circle-o"></i>
+									Thai FoodN
+								</a>
+							</div>
+						</div>	<!-- End of /.block -->
+						<div class="block">
+							<h4>Popular Posts</h4>
+							{% for obj4 in ob4 %}
+							<ul class="media-list">
+							 	<li class="media">
+							    	<a class="pull-left" href="#">
+							      		<img class="media-object" src="{{obj4.image.url}}" alt="...">
+							    	</a>
+							    	<div class="media-body">
+							      		<a href="{% url 'blogapps:article' obj4.id %}" class="media-heading">{{obj4.title}}</a>
+							    	  	<p>{{obj4.created_on}}</p>
+							    	</div>
+							  	</li>
+							  </ul>
+							{% endfor %}
+						</div>	<!-- End of /.block -->
+
+						<div class="block">
+							<h4>Tag Cloud</h4>
+							<div class="tag-link">
+								<a href="">BALLET</a>
+								<a href="">BLOG</a>
+								<a href="">CHRISTMAS</a>
+								<a href="">ELEGANCE</a>
+								<a href="">ELEGANT</a>
+								<a href="">SHOPPING</a>
+								<a href="">SHOP</a>
+								<a href="">PHOTOGRAPHY</a>
+							</div>
+						</div>	<!-- End of /.block -->
+
+					</div>	<!-- End of /.Sidebar -->
+				</div>	<!-- End of /.col-md-3 -->
+			</div>	<!-- End of /.row -->
+		</div>	<!-- End of /.container -->
+	</section> <!-- End of /.Section -->
+
+{% endblock content %}

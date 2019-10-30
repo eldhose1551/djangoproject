@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="background-image: url({% static 'images/sl3.jpg' %});">
+<center>
+    <br>
+    <br>
+    <form action="{% url 'registration' %}" class="std" id="create-account_form" method="post"
+          style="width:500px; height:400px; margin-block-start: 150px; margin-block-end: 150px;">
+        {% csrf_token %}
+        <fieldset style="background-color: white;">
+            <h3>Create your account</h3>
+            <div class="form_content clearfix">
+                <p class="text">
+                    <label for="create_username">Username</label>
+                    <span>
+                    <input class="account_input" id="create_username" name="create_username"
+                           placeholder="Enter Username"
+                           style="height: auto; padding: 5px; width: 220px; border: 1px solid #dedede;" type="text"
+                           value="">
+                </span>
+                </p>
+                <p class="text">
+                    <label for="create_password">Password</label>
+                    <span>
+                    <input class="account_input" id="create_password" name="create_password"
+                           placeholder="Enter Password"
+                           style="height: auto; padding: 5px; width: 220px; border: 1px solid #dedede;" type="password"
+                           value="">
+                </span>
+                </p>
+                <p class="text">
+                    <label for="cnfrm_pswd">Confirm password</label>
+                    <span>
+                    <input class="account_input" id="cnfrm_pswd" name="cnfrm_pswd" placeholder="Enter confirm password"
+                           style="height: auto; padding: 5px; width: 220px; border: 1px solid #dedede;" type="password"
+                           value="">
+                </span>
+                </p>
+                <p class="text">
+                    <label for="email_create">Email</label>
+                    <span>
+                    <input class="account_input" id="email_create" name="email_create"
+                           placeholder="Enter Email Id"
+                           style="height: auto; padding: 5px; width: 220px; border: 1px solid #dedede;" type="email"
+                           value="">
+                </span>
+                </p>
+
+                <p class="submit">
+                    <button class="btn btn-primary">Create Your Account</button>
+                </p>
+            </div><!-- End Of form-content -->
+        </fieldset>
+        {% if messages %}
+        {% for m in messages %}
+        {{m}}
+        {% endfor %}
+        {% endif %}
+    </form>
+</center>
+</body>
+</html>
